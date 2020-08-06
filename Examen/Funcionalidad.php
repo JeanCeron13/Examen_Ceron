@@ -1,6 +1,6 @@
 <?php 
     include './Servicios/services.php';
-    error_reporting(0);
+    
     $funcionalidad = new Servicios();
     $cod_modulo = "";
     $estado="";

@@ -1,7 +1,7 @@
 <?php 
     include './Servicios/services.php';
     $rol = new Servicios();
-    error_reporting(0);
+ 
 
     $cod_modulo = "";
     $estado="";
