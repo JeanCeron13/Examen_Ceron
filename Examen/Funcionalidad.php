@@ -1,5 +1,6 @@
 <?php 
     include './Servicios/services.php';
+    error_reporting(0);
     $funcionalidad = new Servicios();
     $cod_modulo = "";
     $estado="";
@@ -146,7 +147,7 @@
                                 <td>
                                     <div class="text-center">
                                         <div class="btn-group">
-                                            <a href="Funcionalidad.php?update=<?php echo $row ["COD_FUNCIONALIDAD"];?>&modulo=<?php echo $row ["COD_MODULO"];?>" type="button" class="btn btn-primary">Editar</a>
+                                            <a href="Funcionalidad.php?update=<?php echo $row ["COD_FUNCIONALIDAD"];?>&modulo=<?php echo $row ["COD_MODULO"];?>" type="button" class="btn btn-primary">Modificar</a>
                                             <a href="Funcionalidad.php?delete=<?php echo $row ["COD_FUNCIONALIDAD"];?>&modulo=<?php echo $row ["COD_MODULO"];?>" type="button" class="btn btn-danger">Eliminar</a>   
                                         </div>
                                     </div>

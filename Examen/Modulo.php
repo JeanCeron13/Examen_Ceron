@@ -124,7 +124,7 @@
                                 <td>
                                     <div class="text-center">
                                         <div class="btn-group">
-                                            <a href="Modulo.php?update=<?php echo $row ["COD_MODULO"];?>#editar" type="button" class="btn btn-primary">Editar</a>
+                                            <a href="Modulo.php?update=<?php echo $row ["COD_MODULO"];?>#editar" type="button" class="btn btn-primary">Modificar</a>
                                             <a href="Modulo.php?delete=<?php echo $row ["COD_MODULO"];?>" type="button" class="btn btn-danger">Eliminar</a>
                                             
                                         </div>
