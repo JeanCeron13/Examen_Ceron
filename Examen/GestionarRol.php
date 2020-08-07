@@ -1,7 +1,7 @@
 <?php 
     include './Servicios/services.php';
     $rol = new Servicios();
- 
+
 
     $cod_modulo = "";
     $estado="";
@@ -32,7 +32,7 @@
     }
     else if(isset($_GET['delete']))
     {
-        $modulo->eliminarLogicoModulo($_GET['delete']);
+        $rol->eliminarModuloPorRol($_GET['delete'],$_GET['modulo']);
     }
 ?>
 
@@ -94,59 +94,57 @@
                 <form action="" method="get">
                     <select class="form-control" name="rol" id="selectrol">
                         <option value="" disabled="" selected="">Selecciona un Rol</option>
-                        <?php 
+                            <?php 
                                 $result2 = $rol->mostrarRoles();
                                 foreach($result2 as $opciones):
                             ?>
                         <option value="<?php echo $opciones['COD_ROL'] ?>"><?php echo $opciones['NOMBRE'] ?></option>
-                        <?php endforeach ?>
+                            <?php endforeach ?>
                     </select><br>
                     <input type="submit" name="cod_rol" value="Aceptar" class="btn btn-primary">
                 </form>
                 <script type="text/javascript">
-                document.getElementById('selectrol').value = "<?php echo $_GET["
-                rol "] ?>";
+                        document.getElementById('selectrol').value = "<?php echo $_GET["rol"] ?>";
                 </script>
-
+                
                 <?php
                     $nombre_rol=$_GET["rol"];
                 ?>
             </div><br>
 
             <div class="row">
-                <form action="GestionarRol.php" name="forma" method="post" id="forma">
+                <form action="" name="forma" method="post" id="forma">
                     <div class="col-xs-12 col-sm-8 col-sm-offset-2">
                         <section id="tm-section-1" class="tm-section">
                             <div class="funcionalidad">
 
                                 <table class="table" border="1">
-                                    <thead class="text-center">
-                                        <tr>
-                                            <th>Modulos</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                                <thead class="text-center">
+                            <tr>
+                                <th>Modulos</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
                                 $result = $rol->mostrarModulosPorRol($nombre_rol);     
                                 if ($result->num_rows > 0) 
                                 {
                                     while($row = $result->fetch_assoc()) 
                                     { 
                             ?>
-                                        <input type="hidden" name="nombre_rol" value="<?php echo $row ["COD_ROL"];?>">
-                                        <tr>
-                                            <td><?php echo $row ["NOMBRE"];?></td>
-                                            <td>
-                                                <div class="text-center">
-                                                    <div class="btn-group">
-                                                        <a href="GestionarRol.php?delete=<?php echo $row ["COD_FUNCIONALIDAD"];?>"
-                                                            type="button" class="btn btn-danger">Eliminar</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <?php
+                            <input type="hidden" name="nombre_rol" value="<?php echo $row ["COD_ROL"];?>">
+                            <tr>
+                                <td><?php echo $row ["NOMBRE"];?></td>
+                                <td>
+                                    <div class="text-center">
+                                        <div class="btn-group">
+                                            <a href="GestionarRol.php?delete=<?php echo $row ['COD_ROL'];?>&modulo=<?php echo $row['COD_MODULO'] ?>" type="button" class="btn btn-danger">Eliminar</a>   
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php
                                     }
                                 }
                                 else
@@ -168,35 +166,30 @@
                                         <h2 class="text-center text-light"><?php echo $mensaje ?></h2>
                                         <div class="contact_message">
 
-                                            <div class="card-body">
+                                        <div class="card-body">
+                <!--<form action="index.php" name="forma" method="post" id="forma">-->
+                    <div class="form-group row" id="editar">
+                        <label for="url_principal" id="lblCodigo" class="col-sm-2 col-form-label">Rol</label>
 
-                                                <div class="form-group row" id="editar">
-                                                    <label for="url_principal" id="lblCodigo"
-                                                        class="col-sm-2 col-form-label">Rol</label>
-    
-                                                        <input type="text" name="rol" value="<?php echo $nombre_rol ?>"
-                                                            require class="form-control">
+                            <input type="text" name="rol" value="<?php echo $nombre_rol ?>" require class="form-control">
 
-                                                </div>
-                                                <div class="form-group row" id="editar">
-                                                    <label for="url_principal" id="lblCodigo"
-                                                        class="col-sm-2 col-form-label">Módulo</label>
+                    </div>
+                    <div class="form-group row" id="editar">
+                        <label for="url_principal" id="lblCodigo" class="col-sm-2 col-form-label">Módulo</label>
 
-                                                        <select class="form-control" name="modulo" id="selectmodulo">
-                                                            <option value="" disabled="" selected="">Selecciona un
-                                                                Módulo</option>
-                                                            <?php 
-                                                            $result3 = $rol->mostrarModulos();
-                                                            foreach($result3 as $opciones):
-                                                            ?>
-                                                            <option value="<?php echo $opciones['COD_MODULO'] ?>">
-                                                                <?php echo $opciones['NOMBRE'] ?>
-                                                            </option>
-                                                            <?php endforeach ?>
-                                                        </select>
-                                                </div>
-                                                <input type="submit" name="accionRol" value="<?php echo $accion ?>"
-                                                    class="btn btn-primary">
+                            <select class="form-control" name="modulo" id="selectmodulo">
+                                <option value="" disabled="" selected="">Selecciona un Módulo</option>
+                                    <?php 
+                                        $result3 = $rol->mostrarModulos();
+                                        foreach($result3 as $opciones):
+                                    ?>
+                                <option value="<?php echo $opciones['COD_MODULO'] ?>"><?php echo $opciones['NOMBRE'] ?></option>
+                                    <?php endforeach ?>
+                            </select>    
+
+                        
+                    </div>
+                    <input type="submit" name="accionRol" value="<?php echo $accion ?>" class="btn btn-primary">
                                             </div>
                                         </div>
                                     </div>
